@@ -39,7 +39,7 @@ Il en existe plusieurs mais nous nous appuyerons sur la distribution [Miniconda]
         >>> 
         ```
         Appuyer sur la touche ENTRÉE, puis la licence du logiciel va s'afficher :
-        ```
+            ```
         [...]
         Do you accept the license terms? [yes|no]
         [no] >>> yes
