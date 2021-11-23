@@ -93,5 +93,102 @@ afficheTemps(proportionTemps((2,0,36,0),0.2))
 
 afficheTemps((1,0,14,23))
 
+def proportionTemps(temps: list, proportion: int):
+    return secondeEnTemps((tempsEnSeconde(temps) * (proportion / 100)))
+# resultat = proportionTemps((2, 0, 36, 0), 0.2)
+# afficheTemps(resultat)
+
+
+def tempsEnDate(temps: list):
+    annees = tempsEnSeconde(temps) // (60 * 60 * 24 * 365)
+    temps = tempsEnSeconde(temps) % (60 * 60 * 24 * 365)
+    jours = temps // (60 * 60 * 24)
+    temps = temps % (60 * 60 * 24)
+    heures = temps // (60 * 60)
+    temps = temps % (60 * 60)
+    minutes = temps // 60
+    temps = temps % 60
+    secondes = temps
+    return (annees, jours, heures, minutes, secondes)
+
+
+def secondeEnDate(secondes: int):
+    return tempsEnDate(secondeEnTemps(secondes))
+
+
+def afficheDate(date=secondeEnDate(time.time())):
+    if date[0] != 0 and date[0] > 1:
+        print(date[0], "années", end=" ")
+    elif date[0] == 1:
+        print(date[0], "année", end=" ")
+    if date[1] != 0 and date[1] > 1:
+        print(date[1], "jours", end=" ")
+    elif date[1] == 1:
+        print(date[1], "jour", end=" ")
+    if date[2] != 0 and date[2] > 1:
+        print(date[2], "heures", end=" ")
+    elif date[2] == 1:
+        print(date[2], "heure", end=" ")
+    if date[3] != 0 and date[3] > 1:
+        print(temps[3], "minutes", end=" ")
+    elif date[3] == 1:
+        print(date[3], "minute", end=" ")
+    if date[4] != 0 and date[4] > 1:
+        print(date[4], "secondes", end=" ")
+    elif date[4] == 1:
+        print(date[4], "seconde", end=" ")
+
+
+# temps = secondeEnTemps(1000000000)
+# afficheTemps(temps)
+# afficheDate(tempsEnDate(temps))
+
+
+# import time
+# print(secondeEnTemps(time.time()))
+# afficheDate(tempsEnDate(secondeEnTemps(time.time())))
+# secondeEnTemps(time.time())
+# time.gmtime()
+
+def nombreBisextile(jour: int):
+    temps = (int(jour), 0, 0, 0)
+    date = tempsEnDate(secondeEnTemps(tempsEnSeconde(temps)))
+    annee = date[0]
+    compteur = 0
+    while annee != 0:
+        if (annee % 4) == 0 and (annee % 100 != 0 or annee % 400 == 0):
+            compteur += 1
+        annee += -1
+    return compteur
+
+
+# print(nombreBisextile(200000))
+
+
+def tempsEnDateBisextile(temps: list):
+    jours = temps[0]
+    jours += nombreBisextile(jours)
+    date = (0, jours, temps[1], temps[2], temps[3])
+    return date
+
+
+# temps = secondeEnTemps(1000000000)
+# afficheTemps(temps)
+# afficheDate(tempsEnDateBisextile(temps))
+# afficheDate()
+
+
+def verifie(horaires: list):
+    sommeHoraires = 0
+    for elem in horaires:
+        print("L'employé a fait", elem[1] + 24 * elem[0], "heures dans la semaine.")
+        sommeHoraires += tempsEnSeconde(elem)
+        if tempsEnSeconde(elem) > (48 * 3600) or sommeHoraires > (140 * 3600):
+            return print("Les horaires limites ont été dépassés.", "Il a fait", sommeHoraires // 3600, "heures dans le mois.")
+    return print("Les horaires limites ont été respectés.", "Il a fait", sommeHoraires // 3600, "heures dans le mois.")
+
+
+# horaires = [[1, 2, 39, 34], [0, 3, 9, 4], [0, 2, 39, 51], [0, 1, 13, 46]]
+# verifie(horaires)
 
 
