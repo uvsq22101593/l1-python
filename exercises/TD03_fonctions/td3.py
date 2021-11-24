@@ -1,3 +1,5 @@
+#pour exécuter aller dans l1-python ->cd exercises ->cd TD03_fonctions puis faire python td3.py puis ENTREE
+
 temps = (3,23,1,34)
 def tempsEnSeconde(temps):
     """ Renvoie la valeur en seconde de temps donné comme jour, heure, minute, seconde."""
